@@ -1,5 +1,5 @@
-/* Hoard offline worker. 33981c5e45 is set by build.py; a new build = a new cache. */
-const VER='hoard-33981c5e45',FONTS='hoard-fonts',CORE=['./','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png','./icon-maskable-512.png','./apple-touch-icon.png'];
+/* Hoard offline worker. 1.0.7-2f982dd531 is set by build.py; a new build = a new cache. */
+const VER='hoard-1.0.7-2f982dd531',FONTS='hoard-fonts',CORE=['./','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png','./icon-maskable-512.png','./apple-touch-icon.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(VER).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==VER&&k!==FONTS).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
 self.addEventListener('fetch',e=>{const r=e.request;if(r.method!=='GET')return;const u=new URL(r.url);
